@@ -30,11 +30,9 @@ pipeline {
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
                         to: "introh264@gmail.com",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 30
+                    sleep 10
                 }
                 failure {
                     // Send email notification on test failure
@@ -42,11 +40,9 @@ pipeline {
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
                         to: "introh264@gmail.com",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 30
+                    sleep 10
                 }
             }
             }
@@ -66,11 +62,9 @@ pipeline {
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
                         to: "introh264@gmail.com",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 30
+                    sleep 10
                 }
                 failure {
                     // Send email notification on test failure
@@ -78,11 +72,9 @@ pipeline {
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
                         to: "introh264@gmail.com",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 30
+                    sleep 10
                 }
             }
             }
