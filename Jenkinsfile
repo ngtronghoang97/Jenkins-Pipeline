@@ -39,7 +39,7 @@ pipeline {
                     // Send email notification on test success
                     emailext(
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has completed successfully."
+                        body: "The Test stage has completed successfully.",
                         to: "15520260@gm.uit.edu.vn",
                         attachmentsPattern: "*.log"
                     )
@@ -83,12 +83,16 @@ pipeline {
                 failure {
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
-                    body: "The Security Scan stage has failed."
+                    body: "The Security Scan stage has failed.",
+                    attachLog: true,
+                    mimeType: 'text/plain'
                 }
                 success {
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
-                    body: "The Security Scan stage has completed successfully."
+                    body: "The Security Scan stage has completed successfully.",
+                    attachLog: true,
+                    mimeType: 'text/plain'
                 }
             }
         }
