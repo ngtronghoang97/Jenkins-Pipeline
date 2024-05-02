@@ -5,9 +5,9 @@ pipeline {
         DIRECTORY_PATH = 'Jenkins'
         TESTING_ENVIRONMENT = 'SIT753 Professional Practice in IT'
         PRODUCTION_ENVIRONMENT = 'AWS EC2'
-	BUILD_AUTOMATION = 'Maven'
-	STAGING_SERVER = 'AWS EC2'
-	SECURITY_SCAN = "OWASP ZAP"
+	    BUILD_AUTOMATION = 'Maven'
+	    STAGING_SERVER = 'AWS EC2'
+	    SECURITY_SCAN = "OWASP ZAP"
     }
 
     stages {
@@ -34,6 +34,7 @@ pipeline {
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
+                    sleep 30
                 }
                 failure {
                     // Send email notification on test failure
@@ -45,6 +46,7 @@ pipeline {
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
+                    sleep 30
                 }
             }
             }
@@ -68,6 +70,7 @@ pipeline {
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
+                    sleep 30
                 }
                 failure {
                     // Send email notification on test failure
@@ -79,6 +82,7 @@ pipeline {
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
+                    sleep 30
                 }
             }
             }
