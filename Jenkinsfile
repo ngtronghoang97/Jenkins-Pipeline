@@ -29,19 +29,19 @@ pipeline {
                 failure {
                     // Send email notification on test failure
                     emailext(
-                        to: "15520260@gm.uit.edu.vn",
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has failed."
-                        //attachmentsPattern: "*.log"
+                        body: "The Test stage has failed.",
+                        to: "15520260@gm.uit.edu.vn",
+                        attachmentsPattern: "*.log"
                     )
                 }
                 success {
                     // Send email notification on test success
                     emailext(
-                        to: "15520260@gm.uit.edu.vn",
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully."
-                        //attachmentsPattern: "*.log"
+                        to: "15520260@gm.uit.edu.vn",
+                        attachmentsPattern: "*.log"
                     )
                 }
             }
