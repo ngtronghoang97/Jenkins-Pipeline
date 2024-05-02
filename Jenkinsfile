@@ -25,43 +25,23 @@ pipeline {
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
             }
-			/*post {
-                success {
-                    // Send email notification on test success
-                    emailext(
-                        subject: "Testing - Success ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has completed successfully.",
-                        to: "15520260@gm.uit.edu.vn",
-                        //attachmentsPattern: "*.log"
-                    )
-                    sleep(time: 5, unit: 'SECONDS')
-                }
+            post{
                 failure {
                     // Send email notification on test failure
                     emailext(
+                        to: "15520260@gm.uit.edu.vn",
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
-                        to: "15520260@gm.uit.edu.vn",
-                        //attachmentsPattern: "*.log"
-                    )
-                    sleep(time: 5, unit: 'SECONDS')
-                }
-            }*/
-            post{
-                failure {
-                    emailext(
-                    mail to: "15520260@gm.uit.edu.vn",
-                    subject: "Testing - Failure ${currentBuild.fullDisplayName}",
-                    body: "The Test stage has failed.",
-                    attachmentsPattern: "*.log"
+                        attachmentsPattern: "*.log"
                     )
                 }
                 success {
+                    // Send email notification on test success
                     emailext(
-                    mail to: "15520260@gm.uit.edu.vn",
-                    subject: "Testing - Success ${currentBuild.fullDisplayName}",
-                    body: "The Test stage has completed successfully.",
-                    attachmentsPattern: "*.log"
+                        to: "15520260@gm.uit.edu.vn",
+                        subject: "Testing - Success ${currentBuild.fullDisplayName}",
+                        body: "The Test stage has completed successfully.",
+                        attachmentsPattern: "*.log"
                     )
                 }
             }
