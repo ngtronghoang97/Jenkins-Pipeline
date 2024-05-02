@@ -23,6 +23,7 @@ pipeline {
                 echo "Running unit tests."
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
+                sleep(time: 15, unit: 'SECONDS')
 			post {
                 success {
                     // Send email notification on test success
@@ -32,7 +33,7 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 10
+                    sleep(time: 15, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -42,7 +43,7 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 10
+                    sleep(time: 15, unit: 'SECONDS')
                 }
             }
             }
@@ -55,6 +56,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
+                sleep(time: 15, unit: 'SECONDS')
 			post {
                 success {
                     // Send email notification on test success
@@ -64,7 +66,7 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 10
+                    sleep(time: 15, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -74,7 +76,7 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep 10
+                    sleep(time: 15, unit: 'SECONDS')
                 }
             }
             }
