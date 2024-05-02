@@ -1,0 +1,103 @@
+pipeline {
+    agent any
+
+    environment {
+        DIRECTORY_PATH = 'Jenkins'
+        TESTING_ENVIRONMENT = 'SIT753 Professional Practice in IT'
+        PRODUCTION_ENVIRONMENT = 'AWS EC2'
+		STAGING_SERVER = 'AWS EC2'
+		SECURITY_SCAN = "OWASP ZAP"
+    }
+
+    stages {
+        stage('Build') {
+            steps {             
+                // Build the code using Maven
+                sh 'mvn clean package'
+                
+                echo "Fetching the source code from the directory path specified by the environment variable ${env.DIRECTORY_PATH}."
+                echo "Compiling the code and generating any necessary artifacts."
+            }
+        }
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Running unit tests."
+                echo "Running integration tests."
+                echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
+			post {
+                success {
+                    // Send email notification on test success
+                    emailext(
+                        subject: "Testing - Success ${currentBuild.fullDisplayName}",
+                        body: "The Test stage has completed successfully.",
+                        to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                        //attachmentsPattern: "*.log"
+                    )
+                }
+                failure {
+                    // Send email notification on test failure
+                    emailext(
+                        subject: "Testing - Failure ${currentBuild.fullDisplayName}",
+                        body: "The Test stage has failed.",
+                        to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                        //attachmentsPattern: "*.log"
+                    )
+                }
+            }
+            }
+        }
+        stage('Code Analysis') {
+            steps {
+                echo "Integrating a code analysis tool."
+            }
+        }
+        stage('Security Scan') {
+            steps {
+                echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
+			post {
+                success {
+                    // Send email notification on test success
+                    emailext(
+                        subject: "Testing - Success ${currentBuild.fullDisplayName}",
+                        body: "The Test stage has completed successfully.",
+                        to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                        //attachmentsPattern: "*.log"
+                    )
+                }
+                failure {
+                    // Send email notification on test failure
+                    emailext(
+                        subject: "Testing - Failure ${currentBuild.fullDisplayName}",
+                        body: "The Test stage has failed.",
+                        to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                        //attachmentsPattern: "*.log"
+                    )
+                }
+            }
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                echo "Deploying the application to a staging server ${env.STAGING_SERVER}."
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Running integration tests on the staging environment."
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying the code to the production environment ${env.PRODUCTION_ENVIRONMENT}."
+            }
+        }
+    }
+}
