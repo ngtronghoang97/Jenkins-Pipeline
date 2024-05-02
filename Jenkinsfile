@@ -32,8 +32,6 @@ pipeline {
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
                         to: "15520260@gm.uit.edu.vn",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
                     sleep(time: 5, unit: 'SECONDS')
@@ -44,8 +42,6 @@ pipeline {
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
                         to: "15520260@gm.uit.edu.vn",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
                     sleep(time: 5, unit: 'SECONDS')
@@ -70,8 +66,6 @@ pipeline {
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
                         to: "15520260@gm.uit.edu.vn",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
                     sleep(time: 5, unit: 'SECONDS')
@@ -82,8 +76,6 @@ pipeline {
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
                         to: "15520260@gm.uit.edu.vn",
-                        attachLog: true,
-                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
                     sleep(time: 5, unit: 'SECONDS')
