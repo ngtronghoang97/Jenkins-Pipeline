@@ -81,18 +81,20 @@ pipeline {
             }*/
             post{
                 failure {
-                    mail to: "15520260@gm.uit.edu.vn",
-                    subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
-                    body: "The Security Scan stage has failed.",
-                    attachLog: true,
-                    mimeType: 'text/plain'
+                    emailext(
+                        mail to: "15520260@gm.uit.edu.vn",
+                        subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
+                        body: "The Security Scan stage has failed.",
+                        attachLog: true,
+                        mimeType: 'text/plain'
+                    )
                 }
                 success {
+                    emailext attachLog: true,
+                    mimeType: 'text/plain'
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
                     body: "The Security Scan stage has completed successfully.",
-                    attachLog: true,
-                    mimeType: 'text/plain'
                 }
             }
         }
