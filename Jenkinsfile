@@ -5,16 +5,15 @@ pipeline {
         DIRECTORY_PATH = 'Jenkins'
         TESTING_ENVIRONMENT = 'SIT753 Professional Practice in IT'
         PRODUCTION_ENVIRONMENT = 'AWS EC2'
-		STAGING_SERVER = 'AWS EC2'
-		SECURITY_SCAN = "OWASP ZAP"
+	BUILD_AUTOMATION = 'Maven'
+	STAGING_SERVER = 'AWS EC2'
+	SECURITY_SCAN = "OWASP ZAP"
     }
 
     stages {
         stage('Build') {
             steps {             
-                // Build the code using Maven
-                sh 'mvn clean package'
-                
+                echo "Build the source code using ${env.BUILD_AUTOMATION}"
                 echo "Fetching the source code from the directory path specified by the environment variable ${env.DIRECTORY_PATH}."
                 echo "Compiling the code and generating any necessary artifacts."
             }
