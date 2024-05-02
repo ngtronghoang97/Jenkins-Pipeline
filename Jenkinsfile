@@ -31,8 +31,8 @@ pipeline {
                     emailext(
                         to: "15520260@gm.uit.edu.vn",
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has failed.",
-                        attachmentsPattern: "*.log"
+                        body: "The Test stage has failed."
+                        //attachmentsPattern: "*.log"
                     )
                 }
                 success {
@@ -40,8 +40,8 @@ pipeline {
                     emailext(
                         to: "15520260@gm.uit.edu.vn",
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has completed successfully.",
-                        attachmentsPattern: "*.log"
+                        body: "The Test stage has completed successfully."
+                        //attachmentsPattern: "*.log"
                     )
                 }
             }
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
             }
-			post {
+			/*post {
                 success {
                     // Send email notification on test success
                     emailext(
@@ -78,7 +78,7 @@ pipeline {
                         mimeType: 'text/plain'
                     )
                 }
-            }
+            }*/
         }
 
         stage('Deploy to Staging') {
