@@ -25,7 +25,7 @@ pipeline {
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
             }
-			post {
+			/*post {
                 success {
                     // Send email notification on test success
                     emailext(
@@ -45,6 +45,18 @@ pipeline {
                         //attachmentsPattern: "*.log"
                     )
                     sleep(time: 5, unit: 'SECONDS')
+                }
+            }*/
+            post{
+                failure {
+                    mail to: "15520260@gm.uit.edu.vn",
+                    subject: "Testing - Failure ${currentBuild.fullDisplayName}",
+                    body: "The Test stage has failed."
+                }
+                success {
+                    mail to: "15520260@gm.uit.edu.vn",
+                    subject: "Testing - Success ${currentBuild.fullDisplayName}",
+                    body: "The Test stage has completed successfully."
                 }
             }
         }
@@ -59,12 +71,12 @@ pipeline {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
             }
-			post {
+			/*post {
                 success {
                     // Send email notification on test success
                     emailext(
-                        subject: "Testing - Success ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has completed successfully.",
+                        subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
+                        body: "The Security Scan stage has completed successfully.",
                         to: "15520260@gm.uit.edu.vn",
                         //attachmentsPattern: "*.log"
                     )
@@ -73,14 +85,14 @@ pipeline {
                 failure {
                     // Send email notification on test failure
                     emailext(
-                        subject: "Testing - Failure ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has failed.",
+                        subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
+                        body: "The Security Scan stage has failed.",
                         to: "15520260@gm.uit.edu.vn",
                         //attachmentsPattern: "*.log"
                     )
                     sleep(time: 5, unit: 'SECONDS')
                 }
-            }
+            }*/
         }
 
         stage('Deploy to Staging') {
