@@ -18,12 +18,14 @@ pipeline {
                 echo "Compiling the code and generating any necessary artifacts."
             }
         }
+
         stage('Unit and Integration Tests') {
             steps {
                 echo "Running unit tests."
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
-                sleep(time: 15, unit: 'SECONDS')
+                sleep(time: 5, unit: 'SECONDS')
+            }
 			post {
                 success {
                     // Send email notification on test success
@@ -33,7 +35,7 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 15, unit: 'SECONDS')
+                    sleep(time: 10, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -43,20 +45,22 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 15, unit: 'SECONDS')
+                    sleep(time: 10, unit: 'SECONDS')
                 }
             }
-            }
         }
+
         stage('Code Analysis') {
             steps {
                 echo "Integrating a code analysis tool."
             }
         }
+        
         stage('Security Scan') {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
-                sleep(time: 15, unit: 'SECONDS')
+                sleep(time: 5, unit: 'SECONDS')
+            }
 			post {
                 success {
                     // Send email notification on test success
@@ -66,7 +70,7 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 15, unit: 'SECONDS')
+                    sleep(time: 10, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -76,21 +80,23 @@ pipeline {
                         to: "introh264@gmail.com",
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 15, unit: 'SECONDS')
+                    sleep(time: 10, unit: 'SECONDS')
                 }
             }
-            }
         }
+
         stage('Deploy to Staging') {
             steps {
                 echo "Deploying the application to a staging server ${env.STAGING_SERVER}."
             }
         }
+
         stage('Integration Tests on Staging') {
             steps {
                 echo "Running integration tests on the staging environment."
             }
         }
+
         stage('Deploy to Production') {
             steps {
                 echo "Deploying the code to the production environment ${env.PRODUCTION_ENVIRONMENT}."
