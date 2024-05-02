@@ -79,6 +79,18 @@ pipeline {
                     )
                 }
             }*/
+            post{
+                failure {
+                    mail to: "15520260@gm.uit.edu.vn",
+                    subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
+                    body: "The Security Scan stage has failed."
+                }
+                success {
+                    mail to: "15520260@gm.uit.edu.vn",
+                    subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
+                    body: "The Security Scan stage has completed successfully."
+                }
+            }
         }
 
         stage('Deploy to Staging') {
