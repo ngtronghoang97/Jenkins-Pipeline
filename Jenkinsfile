@@ -49,16 +49,20 @@ pipeline {
             }*/
             post{
                 failure {
+                    emailext(
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                     body: "The Test stage has failed.",
                     attachmentsPattern: "*.log"
+                    )
                 }
                 success {
+                    emailext(
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Testing - Success ${currentBuild.fullDisplayName}",
                     body: "The Test stage has completed successfully.",
                     attachmentsPattern: "*.log"
+                    )
                 }
             }
         }
@@ -73,16 +77,16 @@ pipeline {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
             }
-			/*post {
+			post {
                 success {
                     // Send email notification on test success
                     emailext(
                         subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
                         body: "The Security Scan stage has completed successfully.",
                         to: "15520260@gm.uit.edu.vn",
-                        //attachmentsPattern: "*.log"
+                        attachLog: true,
+                        mimeType: 'text/plain'
                     )
-                    sleep(time: 5, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -90,11 +94,11 @@ pipeline {
                         subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
                         body: "The Security Scan stage has failed.",
                         to: "15520260@gm.uit.edu.vn",
-                        //attachmentsPattern: "*.log"
+                        attachLog: true,
+                        mimeType: 'text/plain'
                     )
-                    sleep(time: 5, unit: 'SECONDS')
                 }
-            }*/
+            }
         }
 
         stage('Deploy to Staging') {
