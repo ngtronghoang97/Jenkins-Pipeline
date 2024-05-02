@@ -24,7 +24,6 @@ pipeline {
                 echo "Running unit tests."
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
-                sleep(time: 5, unit: 'SECONDS')
             }
 			post {
                 success {
@@ -33,9 +32,11 @@ pipeline {
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
                         to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 10, unit: 'SECONDS')
+                    sleep(time: 5, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -43,9 +44,11 @@ pipeline {
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
                         to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 10, unit: 'SECONDS')
+                    sleep(time: 5, unit: 'SECONDS')
                 }
             }
         }
@@ -59,7 +62,6 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
-                sleep(time: 5, unit: 'SECONDS')
             }
 			post {
                 success {
@@ -68,9 +70,11 @@ pipeline {
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
                         to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 10, unit: 'SECONDS')
+                    sleep(time: 5, unit: 'SECONDS')
                 }
                 failure {
                     // Send email notification on test failure
@@ -78,9 +82,11 @@ pipeline {
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
                         to: "introh264@gmail.com",
+                        attachLog: true,
+                        mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
                     )
-                    sleep(time: 10, unit: 'SECONDS')
+                    sleep(time: 5, unit: 'SECONDS')
                 }
             }
         }
