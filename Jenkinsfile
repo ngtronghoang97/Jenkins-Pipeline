@@ -52,11 +52,15 @@ pipeline {
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                     body: "The Test stage has failed."
+                    attachLog: true,
+                    mimeType: 'text/plain'
                 }
                 success {
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Testing - Success ${currentBuild.fullDisplayName}",
                     body: "The Test stage has completed successfully."
+                    attachLog: true,
+                    mimeType: 'text/plain'
                 }
             }
         }
