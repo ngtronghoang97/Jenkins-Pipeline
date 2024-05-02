@@ -31,7 +31,7 @@ pipeline {
                     emailext(
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
-                        to: "introh264@gmail.com",
+                        to: "15520260@gm.uit.edu.vn",
                         attachLog: true,
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
@@ -43,7 +43,7 @@ pipeline {
                     emailext(
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
-                        to: "introh264@gmail.com",
+                        to: "15520260@gm.uit.edu.vn",
                         attachLog: true,
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
@@ -69,7 +69,7 @@ pipeline {
                     emailext(
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
-                        to: "introh264@gmail.com",
+                        to: "15520260@gm.uit.edu.vn",
                         attachLog: true,
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
@@ -81,7 +81,7 @@ pipeline {
                     emailext(
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
-                        to: "introh264@gmail.com",
+                        to: "15520260@gm.uit.edu.vn",
                         attachLog: true,
                         mimeType: 'text/plain'
                         //attachmentsPattern: "*.log"
