@@ -24,6 +24,9 @@ pipeline {
                 echo "Running unit tests."
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
+                script {
+                   bat "xcopy /Y \"C:\\Users\\ADMIN\\test.log\" \"${WORKSPACE}\\test.log\""
+                }
             }
             post{
                 failure {
