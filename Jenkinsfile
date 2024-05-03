@@ -34,7 +34,7 @@ pipeline {
                     emailext(
                         subject: "Testing - Failure ${currentBuild.fullDisplayName}",
                         body: "The Test stage has failed.",
-                        mail to: "15520260@gm.uit.edu.vn",
+                        to: "15520260@gm.uit.edu.vn",
                         attachmentsPattern: "*.log"
                     )
                 }
@@ -43,7 +43,7 @@ pipeline {
                     emailext(
                         subject: "Testing - Success ${currentBuild.fullDisplayName}",
                         body: "The Test stage has completed successfully.",
-                        mail to: "15520260@gm.uit.edu.vn",
+                        to: "15520260@gm.uit.edu.vn",
                         attachmentsPattern: "*.log"
                     )
                 }
