@@ -86,11 +86,11 @@ pipeline {
                     body: "The Security Scan stage has failed."
                 }
                 success {
-                    emailext attachLog: true,
+                    emailext( attachLog: true,
                     mimeType: 'text/plain',
                     mail to: "15520260@gm.uit.edu.vn",
                     subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
-                    body: "The Security Scan stage has completed successfully."
+                    body: "The Security Scan stage has completed successfully.")
                 }
             }
         }
