@@ -12,7 +12,7 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {             
+            steps {          
                 echo "Build the source code using ${env.BUILD_AUTOMATION}"
                 echo "Fetching the source code from the directory path specified by the environment variable ${env.DIRECTORY_PATH}."
                 echo "Compiling the code and generating any necessary artifacts."
@@ -24,28 +24,19 @@ pipeline {
                 echo "Running unit tests."
                 echo "Running integration tests."
                 echo "Unit tests and integration tests completed using ${env.TESTING_ENVIRONMENT}."
-                script {
-                   bat "xcopy /Y \"C:\\Users\\ADMIN\\test.log\" \"${WORKSPACE}\\test.log\""
-                }
             }
             post{
                 failure {
-                    // Send email notification on test failure
-                    emailext(
-                        subject: "Testing - Failure ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has failed.",
-                        to: "15520260@gm.uit.edu.vn",
-                        attachmentsPattern: "*.log"
-                    )
+                    emailext subject: "TESTING STATUS - FAILURE",
+                    to: "15520260@gm.uit.edu.vn",
+                    body: "The pipeline testing status failed! Check the log attachment below",
+                    attachLog: true
                 }
                 success {
-                    // Send email notification on test success
-                    emailext(
-                        subject: "Testing - Success ${currentBuild.fullDisplayName}",
-                        body: "The Test stage has completed successfully.",
-                        to: "15520260@gm.uit.edu.vn",
-                        attachmentsPattern: "*.log"
-                    )
+                    emailext subject: "TESTING STATUS - SUCCESS",
+                    to: "15520260@gm.uit.edu.vn",
+                    body: "The pipeline testing status was successful! Check the log attachment below",
+                    attachLog: true
                 }
             }
         }
@@ -60,38 +51,18 @@ pipeline {
             steps {
                 echo "Performing a security scan on the code using a tool ${env.SECURITY_SCAN}."
             }
-			/*post {
-                success {
-                    // Send email notification on test success
-                    emailext(
-                        subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
-                        body: "The Security Scan stage has completed successfully.",
-                        to: "15520260@gm.uit.edu.vn",
-                        attachLog: true,
-                        mimeType: 'text/plain'
-                    )
-                }
-                failure {
-                    // Send email notification on test failure
-                    emailext(
-                        subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
-                        body: "The Security Scan stage has failed.",
-                        to: "15520260@gm.uit.edu.vn",
-                        attachLog: true,
-                        mimeType: 'text/plain'
-                    )
-                }
-            }*/
             post{
                 failure {
-                    mail to: "15520260@gm.uit.edu.vn",
-                    subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
-                    body: "The Security Scan stage has failed."
+                    emailext subject: "Security Scan - Failure ${currentBuild.fullDisplayName}",
+                    to: "15520260@gm.uit.edu.vn",
+                    body: "The Security Scan stage has failed.",
+                    attachLog: true
                 }
                 success {
-                    mail to: "15520260@gm.uit.edu.vn",
-                    subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
-                    body: "The Security Scan stage has completed successfully."
+                    emailext subject: "Security Scan - Success ${currentBuild.fullDisplayName}",
+                    to: "15520260@gm.uit.edu.vn",
+                    body: "The Security Scan stage has completed successfully.",
+                    attachLog: true
                 }
             }
         }
